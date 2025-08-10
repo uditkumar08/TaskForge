@@ -27,13 +27,13 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-//using pre for hash before save
+//using pre for hash before save(password )
 userSchema.pre('save',async function(next){
-    if(!this.isModified('password'))return next();
+    if(!this.isModified('password'))return next();  //(like if name and email update and not password)
 
     this.password = await bcrypt.hash(this.password,10);
     next();
 })
 
 const User = mongoose.model('User', userSchema);
-export default User;
+module.exports = User;
