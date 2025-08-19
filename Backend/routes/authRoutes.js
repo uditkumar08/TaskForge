@@ -26,4 +26,4 @@ router.get('/users',auth,authorizeRoles('admin'),async (req,res)=>{
 })
 
   
-module.exports = router
+module.exports = router //
