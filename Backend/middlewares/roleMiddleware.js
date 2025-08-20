@@ -10,7 +10,7 @@ const authorizeRoles  = (...allowedRole) => {
             
         }
         next();
-    }
+    }   
 }
 
 module.exports = authorizeRoles
