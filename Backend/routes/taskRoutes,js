@@ -1,0 +1,17 @@
+const express = require('express');
+const { createTask, getTasks, updateTask, deleteTask } = require('../controllers/taskController');
+const auth = require('../middleware/auth');
+const authorizeRoles = require('../middleware/authorizeRoles');
+
+const router = express.Router();
+
+// All routes need login
+router.post('/', auth, createTask);                 // user creates task
+router.get('/', auth, getTasks);                    // user gets own, admin gets all
+router.put('/:id', auth, updateTask);               // user can update own, admin can update all
+router.delete('/:id', auth, deleteTask);            // same logic
+
+// Example of admin-only endpoint
+router.get('/admin/all', auth, authorizeRoles('admin'), getTasks);
+
+module.exports = router;
